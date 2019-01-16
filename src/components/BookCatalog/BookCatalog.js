@@ -1,83 +1,80 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import BookList from "../BookList/BookList";
 import SearchBar from "../SearchBar/SearchBar";
+import Button from "../Button/Button";
+import { SEARCH_URL, DEFAULT_QUERY } from '../../consts';
 import "./BookCatalog.css";
-
-// const books = [
-//   {
-//     title: "React",
-//     url: "https://reactjs.org/",
-//     author: "Jordan Walke",
-//     num_comments: 3,
-//     points: 4,
-//     objectID: 0
-//   },
-//   {
-//     title: "Redux",
-//     url: "https://redux.js.org/",
-//     author: "Dan Abramov, Andrew Clark",
-//     num_comments: 2,
-//     points: 5,
-//     objectID: 1
-//   }
-// ];
-
-const DEFAULT_QUERY = "redux";
-
-// Variables to create the endpoint url
-
-const PATH_BASE = "https://hn.algolia.com/api/v1";
-const PATH_SEARCH = "/search";
-const PARAM_SEARCH = "query=";
 
 class BookCatalog extends Component {
   state = {
-    initialBooks: "",
+    initialBooks: [],
     books: null,
-    searchTerm: DEFAULT_QUERY
+    searchTerm: DEFAULT_QUERY,
+    error: null
   };
 
   searchArticlesHandler(books) {
-    this.setState({ books });
+    this.setState({ books, initialBooks: books.hits });
+  }
+
+  fetchDataHandler(term, page = 0) {
+    axios(`${SEARCH_URL}${term}&page=${page}`)
+      .then(books => this.searchArticlesHandler(books.data))
+      .catch(error => this.setState({ error }));
   }
 
   componentDidMount() {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${this.state.searchTerm}`)
-      .then(response => response.json())
-      .then(books => this.searchArticlesHandler(books))
-      .catch(error => error);
+    this.fetchDataHandler(this.state.searchTerm);
   }
 
   deleteBookHandler = id => {
-    const isNotId = book => book.objectID !== id;
-    const updatedBooks = this.state.books.hits.filter(isNotId);
+    const updatedBooks = this.state.books.hits.filter(
+      book => book.objectID !== id
+    );
     this.setState({
       books: { ...this.state.books, hits: updatedBooks }
     });
   };
 
-  searchBookHandler = e => {
-    const searchTerm = e.target.value.toLowerCase();
+  filterBookHandler = e => {
+    const searchValue = e.target.value.toLowerCase();
     const filteredList = this.state.initialBooks.filter(
       book =>
-        book.title.toLowerCase().includes(searchTerm) ||
-        book.author.toLowerCase().includes(searchTerm)
+        book.title.toLowerCase().includes(searchValue) ||
+        book.author.toLowerCase().includes(searchValue)
     );
-    this.setState({ books: filteredList });
+    this.setState({
+      books: { ...this.state.books, hits: filteredList },
+      searchTerm: searchValue
+    });
+  };
+
+  searchBookHandler = e => {
+    this.fetchDataHandler(this.state.searchTerm);
+    e.preventDefault();
   };
 
   render() {
+    const { books, term } = this.state;
+    const page = books && books.page;
+    if (this.state.error) {
+      return <p>Something went wrong</p>;
+    }
     return (
       <div className="BookCatalog">
-        <SearchBar onSearchChange={this.searchBookHandler} />
-        <p>AddBook</p>
-        {this.state.books ? (
-          <BookList
-            books={this.state.books}
-            deleteClicked={this.deleteBookHandler}
-          />
+        <SearchBar
+          onSearchChange={this.filterBookHandler}
+          onSubmit={this.searchBookHandler}
+        />
+        <p>AddArticle</p>
+        {books ? (
+          <BookList books={books} deleteClicked={this.deleteBookHandler} />
         ) : null}
+        <Button onClick={() => this.fetchDataHandler(term, page + 1)}>
+          More
+        </Button>
       </div>
     );
   }

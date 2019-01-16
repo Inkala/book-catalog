@@ -1,5 +1,5 @@
 .Button {
-  padding: 8px 12px;
+  padding: 8px 15px;
   border-radius: 5px;
   border: 1px solid #dddddd;
   background: transparent;
@@ -12,13 +12,12 @@
 }
 
 .Button-inline {
-  border-width: 0;
   background: transparent;
-  color: inherit;
-  text-align: inherit;
-  padding: 0;
+  color: #7e0000;
+  border-color: #deb4b4;
   font-size: inherit;
   cursor: pointer;
+  padding: 5px 10px;
 }
 
 .Button-active {

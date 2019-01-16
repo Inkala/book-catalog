@@ -7,7 +7,7 @@ const bookItem = ({ book, deleteBook }) => (
   <div className="BookItem">
     <span>
       <b>
-        <a href={book.url}>{book.title}</a>
+        <a href={book.url} rel="noopener noreferrer" target="_blank">{book.title}</a>
       </b>
     </span>
     <span>{book.author}</span>
@@ -15,6 +15,7 @@ const bookItem = ({ book, deleteBook }) => (
     <span>{book.points}</span>
     <span>
       <Button
+      type="button"
         className="Button-inline"
         onClick={() => deleteBook(book.objectID)}
       >
