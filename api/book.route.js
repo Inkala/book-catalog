@@ -42,7 +42,7 @@ bookRoutes.route("/update/:id").post(function(req, res) {
   Book.findById(req.params.id, function(err, book) {
     if (!book) res.status(404).send("book not found");
     else {
-      book.name = req.body.name;
+      book.title = req.body.title;
       book.author = req.body.author;
       book.genre = req.body.genre;
       book.price = req.body.price;

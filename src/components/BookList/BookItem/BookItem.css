@@ -1,27 +1,17 @@
-span {
-  display: block;
-}
-
 .BookItem{
   display: flex;
-  line-height: 24px;
-  white-space: nowrap;
-  margin: 10px 0;
+  margin: 10px;
   padding: 10px;
   background: #ffffff;
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--border);
+  width: 33%;
+  flex-direction: column;
 }
 
 .BookItem span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 5px;
+  font-weight: bold;
 }
 
-.BookItem a {
-  color: #222;
-}
-
-.BookItem a:hover {
-  text-decoration: underline;
+.BookItem p {
+  margin: 8px 0;
 }

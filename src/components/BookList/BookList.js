@@ -6,18 +6,19 @@ import "./BookList.css";
 const bookList = props => {
   return (
     <section className="BookList">
-      {/* {console.log("From BookList",props.books.hits)} */}
-      {props.bookList.hits ? props.bookList.hits.map(book => (
-        <BookItem
-          key={book.objectID}
-          book={book}
-          deleteBook={props.deleteClicked}
-        />
-      )) : null}
+      {props.bookList ? props.bookList.map(book => {
+            console.log("From Book List", book._id);
+            return (
+              <BookItem
+                key={book._id}
+                book={book}
+                deleteBook={props.deleteClicked}
+              />
+            );
+          })
+        : null}
     </section>
   );
 };
 
 export default bookList;
-
-//

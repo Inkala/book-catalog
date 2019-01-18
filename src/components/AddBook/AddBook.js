@@ -7,12 +7,12 @@ const addBook = props => (
     <h3>Add New Book</h3>
     <form className="ab-form" onSubmit={props.onSubmit}>
       <div className="ab-form__item">
-        <label className="ab-form__label"> Name:</label>
+        <label className="ab-form__label"> Title:</label>
         <input
           type="text"
           className="ab-form__input"
-          value={props.book.name}
-          onChange={props.onNameChange}
+          value={props.book.title}
+          onChange={props.onTitleChange}
           />
       </div>
       <div className="ab-form__item">

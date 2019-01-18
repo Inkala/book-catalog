@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema for Business
 let Book = new Schema({
-  name: {
+  title: {
     type: String
   },
   author: {

@@ -5,23 +5,24 @@ import "./BookItem.css";
 
 const bookItem = ({ book, deleteBook }) => (
   <div className="BookItem">
-    <span>
-      <b>
-        <a href={book.url} rel="noopener noreferrer" target="_blank">{book.title}</a>
-      </b>
-    </span>
-    <span>{book.author}</span>
-    <span>{book.num_comments}</span>
-    <span>{book.points}</span>
-    <span>
-      <Button
+    <h3>{book.title}</h3>
+    <p><span>Author: </span>{book.author}</p>
+    <p><span>Genre: </span>{book.genre}</p>
+    <p><span>Price: </span>{`$ ${book.price}`}</p>
+    {/* <Button
       type="button"
-        className="Button-inline"
-        onClick={() => deleteBook(book.objectID)}
-      >
-        Remove
-      </Button>
-    </span>
+      className="Button-inline"
+      onClick={() => editBook(book._id)}
+    >
+      Edit
+    </Button> */}
+    <Button
+      type="button"
+      className="Button-inline"
+      onClick={() => deleteBook(book._id)}
+    >
+      Remove
+    </Button>
   </div>
 );
 
