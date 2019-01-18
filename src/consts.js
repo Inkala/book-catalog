@@ -4,3 +4,5 @@ const PARAM_SEARCH = "query=";
 
 export const SEARCH_URL = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}`
 export const DEFAULT_QUERY = "redux";
+
+export const db_url = 'https://book-catalog-9e261.firebaseio.com/';

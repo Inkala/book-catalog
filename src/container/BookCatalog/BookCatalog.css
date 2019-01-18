@@ -1,0 +1,9 @@
+.BookCatalog {
+  padding-top: 75px;
+  background: var(--light-grey);
+  margin: auto;
+  width: 90%;
+  max-width: 980px;
+  padding: 85px 20px 15px;
+  box-sizing: border-box;
+}

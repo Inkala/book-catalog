@@ -11,7 +11,7 @@ const searchBar = props => (
       placeholder="Search for an article..."
       onChange={props.onSearchChange}
     />
-    <Button  type="submit">
+    <Button  type="submit" className='SearchButton'>
       Search
     </Button>
   </form>

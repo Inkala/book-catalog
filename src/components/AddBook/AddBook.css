@@ -1,0 +1,38 @@
+.add-book {
+  display: flex;
+  flex-direction: column;
+}
+
+.ab-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ab-form__item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.ab-form__item span {
+  width: 6px;
+  margin-left: -6px;
+}
+
+.ab-form__label {
+  display: flex;
+  width: 70px;
+}
+
+.ab-form__input {
+  display: flex;
+  margin: 5px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  width: 100%;
+}
+
+.ab-form__button {
+  width: 50px;
+}

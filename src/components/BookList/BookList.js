@@ -7,7 +7,7 @@ const bookList = props => {
   return (
     <section className="BookList">
       {/* {console.log("From BookList",props.books.hits)} */}
-      {props.books.hits ? props.books.hits.map(book => (
+      {props.bookList.hits ? props.bookList.hits.map(book => (
         <BookItem
           key={book.objectID}
           book={book}

@@ -3,7 +3,7 @@
   border-radius: 5px;
   border: 1px solid #dddddd;
   background: transparent;
-  color: #808080;
+  color: var(--drark-grey);
   cursor: pointer;
 }
 

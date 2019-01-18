@@ -1,11 +1,14 @@
 .SearchBar {
-  text-align: center;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .SearchBar input {
   padding: 8px 10px;
   border-radius: 5px;
-  outline: none;
   margin-right: 10px;
-  border: 1px solid #dddddd;
+  border: 1px solid var(--border);
 }
+

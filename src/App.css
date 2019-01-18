@@ -1,11 +1,6 @@
 .App {
   color: #222;
-  background: #f4f4f4;
   font: 400 14px CoreSans, Arial, sans-serif;
-  margin: auto;
-  width: 90%;
-  padding: 2px 20px;
-  box-sizing: border-box;
 }
 
 h1 {
