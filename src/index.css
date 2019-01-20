@@ -6,7 +6,7 @@
   --light-grey: #f4f4f4;
   --grey: #808080;
   --dark-grey: #3a3a3a;
-  --border: #dddddd;
+  --border: 1px solid #dddddd;
 }
 
 body {

@@ -1,55 +1,19 @@
 import React from "react";
 
+import Wrapper from "../../helpers/Wrapper/Wrapper";
+import BookForm from "../../components/BookForm/BookForm";
 import "./AddBook.css";
 
 const addBook = props => (
-  <div className="add-book">
-    <h3>Add New Book</h3>
-    <form className="ab-form" onSubmit={props.onSubmit}>
-      <div className="ab-form__item">
-        <label className="ab-form__label"> Title:</label>
-        <input
-          type="text"
-          className="ab-form__input"
-          value={props.book.title}
-          onChange={props.onTitleChange}
-          />
-      </div>
-      <div className="ab-form__item">
-        <label className="ab-form__label">Author:</label>
-        <input
-          type="text"
-          className="ab-form__input"
-          value={props.book.author}
-          onChange={props.onAuthorChange}
-        />
-      </div>
-      <div className="ab-form__item">
-        <label className="ab-form__label">Genre:</label>
-        <input
-          type="text"
-          className="ab-form__input"
-          value={props.book.genre}
-          onChange={props.onGenreChange}
-        />
-      </div>
-      <div className="ab-form__item">
-        <label className="ab-form__label">Price:</label>
-        <span>$</span>
-        <input
-          type="number"
-          className="ab-form__input"
-          value={props.book.price}
-          onChange={props.onPriceChange}
-        />
-      </div>
-      <input
-        type="submit"
-        value="Save"
-        className="ab-form__button"
+  <Wrapper>
+    <div className="add-book">
+      <h3>Add New Book</h3>
+      <BookForm
+        book={props.book}
+        onSubmitClicked={props.onSubmit}
       />
-    </form>
-  </div>
+    </div>
+  </Wrapper>
 );
 
 export default addBook;

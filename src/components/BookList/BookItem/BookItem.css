@@ -1,17 +1,29 @@
-.BookItem{
+.book-item {
   display: flex;
-  margin: 10px;
-  padding: 10px;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  width: 33%;
   flex-direction: column;
+  padding: 10px 20px;;
+  background: #ffffff;
+  border: var(--border);
+  width: 30%;
+  box-sizing: border-box;
+  margin: 15px auto;
 }
 
-.BookItem span {
+.book-item h3 {
+  margin: 0.8em 0;
+}
+
+.book-item p {
+  margin: 0.5em 0;
+}
+
+.book-item span {
   font-weight: bold;
 }
 
-.BookItem p {
-  margin: 8px 0;
+.book-item__buttons {
+  display: flex;
+  width: 85%;
+  align-self: center;
+  margin-top: 5px;
 }

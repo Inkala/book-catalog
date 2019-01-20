@@ -1,20 +1,21 @@
 import React from "react";
 
-import Button from "../Button/Button";
+import GenresFilter from "./GenresFilter/GenresFilter";
+import Wrapper from "../../helpers/Wrapper/Wrapper";
 import "./SearchBar.css";
 
 const searchBar = props => (
-  <form className="SearchBar" onSubmit={props.onSubmit}>
-    <input
-      type="text"
-      className="searchInput"
-      placeholder="Search for an article..."
-      onChange={props.onSearchChange}
-    />
-    <Button  type="submit" className='SearchButton'>
-      Search
-    </Button>
-  </form>
+  <Wrapper>
+    <form className="search-bar" onSubmit={props.onSubmit}>
+      <input
+        type="text"
+        className="search-bar__input"
+        placeholder="Search for an article..."
+        onChange={props.onSearchChange}
+      />
+      <GenresFilter />
+    </form>
+  </Wrapper>
 );
 
 export default searchBar;

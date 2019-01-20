@@ -1,0 +1,49 @@
+db.book.insert({
+  "title": "The Call of Cthulhu",
+  "author": "H.P. Lovecraft",
+  "genre": "Horror",
+  "price": 35.7
+})
+
+db.book.insert({
+  "title": "The Golden Compass",
+  "author": "Phillip Pullman",
+  "genre": "Fantasy",
+  "price": 26.59
+})
+
+db.book.insert({
+  "title": "Blood and Chocolate",
+  "author": "Annette Curtis Klause",
+  "genre": "Fantasy",
+  "price": 24.12
+})
+
+db.book.insert({
+  "title": "The Girl with the Dragon Tattoo",
+  "author": "Stieg Larsson",
+  "genre": "Thriller",
+  "price": 32.75
+})
+
+db.book.insert({
+  "title": "Wicked",
+  "author": "Gregory Maguire",
+  "genre": "Fiction",
+  "price": 18.95
+})
+
+db.book.insert({
+  "title": "The Hobbit",
+  "author": "J.R.R. Tolkien",
+  "genre": "Adventure",
+  "price": 27.45
+})
+
+db.book.insert({
+  "title": "The Color of Magic",
+  "author": "Terry Pratchett",
+  "genre": "Fiction",
+  "price": 31.2
+})
+

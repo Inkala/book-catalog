@@ -8,19 +8,17 @@ import "./MainMenu.css";
 
 const mainMenu = props => (
   <Router>
-    <div className="MainMenu">
-      <nav className="navbar">
-        <Link to={"/"} className="MenuLogo">BookStore</Link>
-        <div>
-          <ul className="MenuItems">
-            <li className="MenuItem">
-              <Link to={"/books"}>Books</Link>
-            </li>
-            <li className="MenuItem">
-              <Link to={"/add-book"}>Add Book</Link>
-            </li>
-          </ul>
-        </div>
+    <div>
+      <nav className="main-menu">
+        <Link to={"/"} className="menu-logo">BookStore</Link>
+        <ul className="menu-items">
+          <li className="menu-item">
+            <Link to={"/books"}>Books</Link>
+          </li>
+          <li className="menu-item">
+            <Link to={"/add-book"}>Add Book</Link>
+          </li>
+        </ul>
       </nav>
       <Switch>
         <Route exact path="/create" component={AddBook} />
@@ -38,7 +36,7 @@ export default mainMenu;
 
   // <header className="">
   //   <span>BookStore</span>
-  //   <ul className="MenuItems">
+  //   <ul className="menu-items">
   //     <li>Books</li>
   //     <li>Genres</li>
   //     <li>Add Book</li>

@@ -18,7 +18,7 @@ bookRoutes.route("/add")
     });
 });
 
-// Defined get data(index or listing) route
+// Defined get index route
 bookRoutes.route("/").get(function(req, res) {
   Book.find(function(err, books) {
     if (err) {

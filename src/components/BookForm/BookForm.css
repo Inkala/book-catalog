@@ -1,0 +1,33 @@
+.bf-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.bf-form__item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.bf-form__item span {
+  width: 6px;
+  margin-left: -6px;
+}
+
+.bf-form__label {
+  display: flex;
+  width: 70px;
+}
+
+.bf-form__input {
+  display: flex;
+  margin: 5px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: var(--border);
+  width: 100%;
+}
+
+.bf-form__button {
+  width: 50px;
+}

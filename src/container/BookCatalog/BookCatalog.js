@@ -4,10 +4,18 @@ import axios from "axios";
 import BookList from "../../components/BookList/BookList";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AddBook from "../../components/AddBook/AddBook";
-import Button from "../../components/Button/Button";
-
 import { PATH_BASE } from "../../consts";
 import "./BookCatalog.css";
+
+/**
+ * TODO:
+ * Fix MongoDB names (book - books)
+ * Create genres dropdown
+ * Make Add Books and Genres a different page
+ * Add CRUD funcs to genres page
+ * Style components
+ * Clean code and comments
+ */
 
 class BookCatalog extends Component {
   state = {
@@ -18,35 +26,23 @@ class BookCatalog extends Component {
       price: ""
     },
     bookList: null,
-    // initialBookList: [],
-    // searchTerm: DEFAULT_QUERY,
+    initialBookList: [],
     error: null
   };
 
-  // searchArticlesHandler(bookList) {
-  //   this.setState({ bookList, initialBookList: bookList.hits });
-  // }
-
-  fetchDataHandler() {
+  componentDidMount() {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
-        console.log("Res Data!!!", res.data);
-        this.setState({ bookList: res.data });
+        this.setState({
+          bookList: res.data,
+          initialBookList: res.data
+        });
       })
       .catch(err => {
         console.log(err);
       });
   }
-
-  componentDidMount() {
-    this.fetchDataHandler();
-  }
-
-  deleteBookHandler = id => {
-    const updatedBookList = this.state.bookList.filter(book => book._id !== id);
-    this.setState({ bookList: updatedBookList });
-  };
 
   filterBookHandler = e => {
     const searchValue = e.target.value.toLowerCase();
@@ -55,10 +51,7 @@ class BookCatalog extends Component {
         book.title.toLowerCase().includes(searchValue) ||
         book.author.toLowerCase().includes(searchValue)
     );
-    this.setState({
-      bookList: { ...this.state.bookList, hits: filteredList },
-      searchTerm: searchValue
-    });
+    this.setState({ bookList: filteredList });
   };
 
   searchBookHandler = e => {
@@ -66,30 +59,30 @@ class BookCatalog extends Component {
     e.preventDefault();
   };
 
-  titleChangeHandler = e => {
-    const book = { ...this.state.book, title: e.target.value };
-    this.setState({ book });
-  };
+  // titleChangeHandler = e => {
+  //   const book = { ...this.state.book, title: e.target.value };
+  //   this.setState({ book });
+  // };
 
-  authorChangeHandler = e => {
-    const book = { ...this.state.book, author: e.target.value };
-    this.setState({ book });
-  };
+  // authorChangeHandler = e => {
+  //   const book = { ...this.state.book, author: e.target.value };
+  //   this.setState({ book });
+  // };
 
-  genreChangeHandler = e => {
-    const book = { ...this.state.book, genre: e.target.value };
-    this.setState({ book });
-  };
+  // genreChangeHandler = e => {
+  //   const book = { ...this.state.book, genre: e.target.value };
+  //   this.setState({ book });
+  // };
 
-  priceChangeHandler = e => {
-    const book = { ...this.state.book, price: e.target.value };
-    this.setState({ book });
-  };
+  // priceChangeHandler = e => {
+  //   const book = { ...this.state.book, price: e.target.value };
+  //   this.setState({ book });
+  // };
 
-  submitBookHandler = e => {
+  submitBookHandler = (e, book) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/book/add", this.state.book)
+      .post("http://localhost:4000/book/add", book)
       .then(res => console.log("From axios post:", res.data));
     const resetBook = {
       title: "",
@@ -100,35 +93,41 @@ class BookCatalog extends Component {
     this.setState({ book: resetBook });
   };
 
+  deleteBookHandler = id => {
+    console.log("From delete",id)
+    // const updatedBookList = this.state.bookList.filter(
+    //   book => book._id !== id);
+    // this.setState({ bookList: updatedBookList });
+    axios
+      .get("http://localhost:4000/book/delete/" + id)
+      .then(console.log("Deleted"))
+      .catch(err => console.log(err));
+  };
+
   render() {
-    const { bookList, term } = this.state;
-    const page = bookList && bookList.page;
     if (this.state.error) {
       return <p>Something went wrong</p>;
     }
     return (
-      <div className="BookCatalog">
+      <div className="book-catalog">
         <SearchBar
           onSearchChange={this.filterBookHandler}
-          onSubmit={this.searchBookHandler}
         />
         <AddBook
           book={this.state.book}
-          onTitleChange={this.titleChangeHandler}
-          onAuthorChange={this.authorChangeHandler}
-          onGenreChange={this.genreChangeHandler}
-          onPriceChange={this.priceChangeHandler}
+          // onTitleChange={this.titleChangeHandler}
+          // onAuthorChange={this.authorChangeHandler}
+          // onGenreChange={this.genreChangeHandler}
+          // onPriceChange={this.priceChangeHandler}
           onSubmit={this.submitBookHandler}
         />
-        {bookList ? (
+        {this.state.bookList ? (
           <BookList
-            bookList={bookList}
+            bookList={this.state.bookList}
+            editClicked={this.editBookHandler}
             deleteClicked={this.deleteBookHandler}
           />
         ) : null}
-        <Button onClick={() => this.fetchDataHandler(term, page + 1)}>
-          More
-        </Button>
       </div>
     );
   }
