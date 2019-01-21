@@ -30,15 +30,15 @@ bookRoutes.route("/").get(function(req, res) {
 });
 
 // Defined edit route
-bookRoutes.route("/edit/:id").get(function(req, res) {
-  let id = req.params.id;
-  Book.findById(id, function(err, book) {
-    res.json(book);
-  });
-});
+// bookRoutes.route("/edit/:id").get(function(req, res) {
+//   let id = req.params.id;
+//   Book.findById(id, function(err, book) {
+//     res.json(book);
+//   });
+// });
 
 //  Defined update route
-bookRoutes.route("/update/:id").post(function(req, res) {
+bookRoutes.route("/edit/:id").post(function(req, res) {
   Book.findById(req.params.id, function(err, book) {
     if (!book) res.status(404).send("book not found");
     else {
@@ -53,7 +53,7 @@ bookRoutes.route("/update/:id").post(function(req, res) {
           res.json("Update complete");
         })
         .catch(err => {
-          res.status(400).send("unable to edit the book");
+          res.status(400).send("Unable to edit the book");
         });
     }
   });

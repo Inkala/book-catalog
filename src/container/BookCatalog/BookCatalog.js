@@ -3,7 +3,6 @@ import axios from "axios";
 
 import BookList from "../../components/BookList/BookList";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import AddBook from "../../components/AddBook/AddBook";
 import { PATH_BASE } from "../../consts";
 import "./BookCatalog.css";
 
@@ -59,45 +58,7 @@ class BookCatalog extends Component {
     e.preventDefault();
   };
 
-  // titleChangeHandler = e => {
-  //   const book = { ...this.state.book, title: e.target.value };
-  //   this.setState({ book });
-  // };
-
-  // authorChangeHandler = e => {
-  //   const book = { ...this.state.book, author: e.target.value };
-  //   this.setState({ book });
-  // };
-
-  // genreChangeHandler = e => {
-  //   const book = { ...this.state.book, genre: e.target.value };
-  //   this.setState({ book });
-  // };
-
-  // priceChangeHandler = e => {
-  //   const book = { ...this.state.book, price: e.target.value };
-  //   this.setState({ book });
-  // };
-
-  submitBookHandler = (e, book) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:4000/book/add", book)
-      .then(res => console.log("From axios post:", res.data));
-    const resetBook = {
-      title: "",
-      author: "",
-      genre: "",
-      price: ""
-    };
-    this.setState({ book: resetBook });
-  };
-
   deleteBookHandler = id => {
-    console.log("From delete",id)
-    // const updatedBookList = this.state.bookList.filter(
-    //   book => book._id !== id);
-    // this.setState({ bookList: updatedBookList });
     axios
       .get("http://localhost:4000/book/delete/" + id)
       .then(console.log("Deleted"))
@@ -112,14 +73,6 @@ class BookCatalog extends Component {
       <div className="book-catalog">
         <SearchBar
           onSearchChange={this.filterBookHandler}
-        />
-        <AddBook
-          book={this.state.book}
-          // onTitleChange={this.titleChangeHandler}
-          // onAuthorChange={this.authorChangeHandler}
-          // onGenreChange={this.genreChangeHandler}
-          // onPriceChange={this.priceChangeHandler}
-          onSubmit={this.submitBookHandler}
         />
         {this.state.bookList ? (
           <BookList

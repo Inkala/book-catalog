@@ -1,13 +1,10 @@
 .App {
   color: #222;
   font: 400 14px CoreSans, Arial, sans-serif;
+
 }
 
 h1 {
   color: var(--dark-blue);
   text-align: center;
-}
-
-*:focus {
-  outline: none;
 }

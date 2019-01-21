@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import MainMenu from "./components/MainMenu/MainMenu";
-import BookCatalog from "./container/BookCatalog/BookCatalog";
+// import BookCatalog from "./container/BookCatalog/BookCatalog";
 import "./App.css";
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <MainMenu />
-        <BookCatalog />
+        {/* <BookCatalog /> */}
       </div>
     );
   }

@@ -8,22 +8,23 @@ import "./MainMenu.css";
 
 const mainMenu = props => (
   <Router>
-    <div>
+    <div className="container">
       <nav className="main-menu">
         <Link to={"/"} className="menu-logo">BookStore</Link>
         <ul className="menu-items">
           <li className="menu-item">
-            <Link to={"/books"}>Books</Link>
+            <Link to={"/add"}>Add Book</Link>
           </li>
           <li className="menu-item">
-            <Link to={"/add-book"}>Add Book</Link>
+            <Link to={"/genres"}>Genres</Link>
           </li>
         </ul>
       </nav>
       <Switch>
-        <Route exact path="/create" component={AddBook} />
+        <Route path="/" exact component={BookCatalog} />
+        <Route path="/add" component={AddBook} />
         <Route path="/edit/:id" component={EditBook} />
-        <Route path="/books" component={BookCatalog} />
+        {/* <Route path="/genres/" component={Genres} /> */}
       </Switch>
     </div>
   </Router>
