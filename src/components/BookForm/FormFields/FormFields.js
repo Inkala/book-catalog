@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Button from "../../../helpers/Button/Button";
-import "./BookFields.css";
+import "./FormFields.css";
 
-class BookFields extends Component {
+class FormFields extends Component {
   state = {
     book: this.props.book,
     error: null,
@@ -83,4 +83,4 @@ render() {
   }
 }
 
-export default BookFields;
+export default FormFields;

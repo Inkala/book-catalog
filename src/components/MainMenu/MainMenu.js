@@ -22,8 +22,7 @@ const mainMenu = props => (
       <Switch>
         <Route path="/" exact component={BookCatalog} />
         <Route path="/add" component={BookForm} />
-        <Route path="/edit" component={BookForm} />
-        {/* <Route path="/edit/:id" book={props.book} render={(props) => <BookForm {...props} />} /> */}
+        <Route path="/edit/:id" component={BookForm} />
         {/* <Route path="/genres/" component={Genres} /> */}
       </Switch>
     </div>
