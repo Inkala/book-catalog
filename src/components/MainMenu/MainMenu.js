@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import BookCatalog from "../../container/BookCatalog/BookCatalog";
-import AddBook from "../AddBook/AddBook";
-import EditBook from "../EditBook/EditBook";
+import BookForm from "../BookForm/BookForm";
 import "./MainMenu.css";
 
 const mainMenu = props => (
@@ -22,8 +21,9 @@ const mainMenu = props => (
       </nav>
       <Switch>
         <Route path="/" exact component={BookCatalog} />
-        <Route path="/add" component={AddBook} />
-        <Route path="/edit/:id" component={EditBook} />
+        <Route path="/add" component={BookForm} />
+        <Route path="/edit" component={BookForm} />
+        {/* <Route path="/edit/:id" book={props.book} render={(props) => <BookForm {...props} />} /> */}
         {/* <Route path="/genres/" component={Genres} /> */}
       </Switch>
     </div>
@@ -31,15 +31,3 @@ const mainMenu = props => (
 );
 
 export default mainMenu;
-
-
-
-
-  // <header className="">
-  //   <span>BookStore</span>
-  //   <ul className="menu-items">
-  //     <li>Books</li>
-  //     <li>Genres</li>
-  //     <li>Add Book</li>
-  //   </ul>
-  // </header>

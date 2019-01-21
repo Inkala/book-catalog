@@ -8,12 +8,16 @@ import "./BookCatalog.css";
 
 /**
  * TODO:
- * Fix MongoDB names (book - books)
+ * Change reset form for redirect
  * Create genres dropdown
  * Make Add Books and Genres a different page
+ * Refresh Form Name
  * Add CRUD funcs to genres page
+ * Make fields required
+ * Handle success and  error messages
+ * Write tests
  * Style components
- * Clean code and comments
+ * Clean code and comments and this.props/this.state
  */
 
 class BookCatalog extends Component {
@@ -29,7 +33,7 @@ class BookCatalog extends Component {
     error: null
   };
 
-  componentDidMount() {
+  fetchDataHandler() {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
@@ -41,6 +45,10 @@ class BookCatalog extends Component {
       .catch(err => {
         console.log(err);
       });
+  };
+
+  componentDidMount() {
+    this.fetchDataHandler();
   }
 
   filterBookHandler = e => {
@@ -53,16 +61,16 @@ class BookCatalog extends Component {
     this.setState({ bookList: filteredList });
   };
 
-  searchBookHandler = e => {
-    this.fetchDataHandler(this.state.searchTerm);
-    e.preventDefault();
-  };
-
-  deleteBookHandler = id => {
-    axios
-      .get("http://localhost:4000/book/delete/" + id)
-      .then(console.log("Deleted"))
-      .catch(err => console.log(err));
+  deleteBookHandler = book => {
+    if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
+      console.log(this)
+      axios
+      .get(`${PATH_BASE}/book/delete/${book._id}`)
+      .then(res => {
+        console.log("Deleted");
+        this.fetchDataHandler()
+      }).catch(err => console.log(err));
+    }  
   };
 
   render() {
