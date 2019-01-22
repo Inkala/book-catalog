@@ -30,6 +30,7 @@ class FormFields extends Component {
   };
 
 render() {
+  const book = this.props.book || this.state.book
   return (
     <div className="bf-wrapper">
       <h3>{this.props.title}</h3>
@@ -42,7 +43,8 @@ render() {
             <input
               type="text"
               className="bf-form__input"
-              value={this.state.book.title}
+              // value={this.state.book.title}
+              value={book.title}
               onChange={this.titleChangeHandler}
             />
           </div>
@@ -51,7 +53,7 @@ render() {
             <input
               type="text"
               className="bf-form__input"
-              value={this.state.book.author}
+              value={book.author}
               onChange={this.authorChangeHandler}
             />
           </div>
@@ -60,7 +62,7 @@ render() {
             <input
               type="text"
               className="bf-form__input"
-              value={this.state.book.genre}
+              value={book.genre}
               onChange={this.genreChangeHandler}
             />
           </div>
@@ -70,7 +72,7 @@ render() {
             <input
               type="number"
               className="bf-form__input"
-              value={this.state.book.price}
+              value={book.price}
               onChange={this.priceChangeHandler}
             />
           </div>

@@ -12,7 +12,8 @@ const bookItem = ({ book, deleteBook }) => (
     <p><span>Genre: </span>{book.genre}</p>
     <p><span>Price: </span>{`$ ${book.price}`}</p>
     <div className="book-item__buttons">
-      <Link className="button button--edit" to={{pathname: `/edit/${book._id}`, book }} >
+      <Link to={`/edit/${book._id}`} className="button button--edit" >
+      {/* <Link to={{pathname: `/edit/${book._id}`, book }} className="button button--edit" > */}
         Edit
       </Link>
       <Button type="button" className="button--delete" onClick={() => deleteBook(book)} >

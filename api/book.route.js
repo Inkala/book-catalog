@@ -29,6 +29,13 @@ bookRoutes.route("/").get(function(req, res) {
 });
 
 //  Defined edit route
+bookRoutes.route('/:id').get(function (req, res) {
+  let id = req.params.id;
+  Book.findById(id, function (err, book){
+      res.json(book);
+  });
+});
+
 bookRoutes.route("/edit/:id").post(function(req, res) {
   Book.findById(req.params.id, function(err, book) {
     if (!book) res.status(404).send("book not found");

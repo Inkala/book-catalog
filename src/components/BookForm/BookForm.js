@@ -7,18 +7,38 @@ import { PATH_BASE } from "../../consts";
 import "./BookForm.css";
 
 class BookForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      book: this.props.location.book || 
-      {
-        title: "",
-        author: "",
-        genre: "",
-        price: ""
-      },
-      shouldRedirect: false
-    };
+  state = {
+    book: {
+      title: "",
+      author: "",
+      genre: "",
+      price: ""
+    }
+  };
+
+  componentDidUpdate() {
+    const initialBook = {
+      title: "",
+      author: "",
+      genre: "",
+      price: ""
+    }
+  if (this.state.book._id && !this.props.match.params.id) {
+    this.setState({book: initialBook})
+  };
+  }
+
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      axios
+        .get(`${PATH_BASE}/book/${this.props.match.params.id}`)
+        .then(res => {
+          this.setState({ book: res.data });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   }
 
   submitBookHandler = (e, book) => {
@@ -37,23 +57,20 @@ class BookForm extends Component {
 
   editBookHandler = (e, book) => {
     e.preventDefault();
-    console.log('e:', e)
-    console.log('book:', book)
-    axios
-      .put(`${PATH_BASE}/book/edit/${book._id}`, book)
-      .then(res => {
-        console.log("Edit succesful");
-      })
-      .catch(err => console.log(err));
+    // console.log("book:", book);
+    // axios
+    //   .put(`${PATH_BASE}/book/edit/${book._id}`, book)
+    //   .then(res => {
+    //     console.log("Edit succesful");
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
-    console.log("Book:", this.state.book);
     let [formName, submitFunction] = ["Add New", this.submitBookHandler];
     if (this.state.book.title.length) {
       [formName, submitFunction] = ["Edit", this.editBookHandler];
     }
-    console.log(formName)
     return (
       <div className="book-form">
         <FormFields
