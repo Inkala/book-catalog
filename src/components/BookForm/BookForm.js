@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect } from "react-router";
+// import { Redirect } from "react-router";
 
 import FormFields from "./FormFields/FormFields";
 import { PATH_BASE } from "../../consts";
@@ -50,30 +50,33 @@ class BookForm extends Component {
     this.setState({ book });
   };
 
-  submitFormHandler = (e) => {
-    // this.submitBookHandler(e, this.state.book);
-    this.editBookHandler(e, this.state.book);
-  }
+  submitFormHandler = e => {
+    this.submitBookHandler(e, this.state.book);
+    // this.editBookHandler(e, this.state.book);
+  };
 
   submitBookHandler(e, book) {
     e.preventDefault();
     axios
-    .post(`${PATH_BASE}/book/add`, book)
-    .then(res => console.log("From axios post:"));
+      .post(`${PATH_BASE}/book/add`, book)
+      .then(res => console.log("From axios post:"));
     // const resetBook = { title: "", author: "", genre: "", price: "" };
-    this.setState({ shouldRedirect: true });
-  };
-  
+    this.props.history.push({
+      pathname: '/',
+      state: {book}
+    })
+  }
+
   editBookHandler(e, book) {
     e.preventDefault();
     axios
-      .put(`${PATH_BASE}/book/edit/${book._id}`, book)
+      .post(`${PATH_BASE}/book/edit/${book._id}`, book)
       .then(res => {
         console.log("Edit succesful");
       })
       .catch(err => console.log(err));
-    this.setState({ shouldRedirect: true });
-  };
+      this.props.history.push('/');
+  }
 
   render() {
     // console.log("Should Redirect?", this.state.shouldRedirect)
@@ -86,7 +89,7 @@ class BookForm extends Component {
           title={`${formName} Book`}
           handleSubmit={this.submitFormHandler}
         />
-        {this.state.shouldRedirect && <Redirect to="/" />}
+        {/* {this.state.shouldRedirect && <Redirect to="/" />} */}
       </div>
     );
   }

@@ -38,18 +38,16 @@ class BookCatalog extends Component {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
-        this.setState({
-          bookList: res.data,
-          initialBookList: res.data
-        });
+        this.setState({ bookList: res.data, initialBookList: res.data });
       })
       .catch(err => {
         console.log(err);
       });
-  };
+  }
 
   componentDidMount() {
     this.fetchDataHandler();
+    setTimeout(this.fetchDataHandler, 500);
   }
 
   filterBookHandler = e => {
@@ -64,32 +62,31 @@ class BookCatalog extends Component {
 
   deleteBookHandler = book => {
     if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
-      console.log(this)
       axios
-      .get(`${PATH_BASE}/book/delete/${book._id}`)
-      .then(res => {
-        console.log("Deleted");
-        this.fetchDataHandler()
-      }).catch(err => console.log(err));
-    }  
+        .get(`${PATH_BASE}/book/delete/${book._id}`)
+        .then(res => {
+          console.log("Deleted");
+          this.fetchDataHandler();
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   render() {
     if (this.state.error) {
       return <p>Something went wrong</p>;
     }
+
     return (
       <div className="book-catalog">
-        <SearchBar
-          onSearchChange={this.filterBookHandler}
-        />
+        <SearchBar onSearchChange={this.filterBookHandler} />
         {this.state.bookList ? (
           <BookList
             bookList={this.state.bookList}
             editClicked={this.editBookHandler}
             deleteClicked={this.deleteBookHandler}
           />
-        ) : null}
+        ) : <div>Loading...</div>}
       </div>
     );
   }
