@@ -13,20 +13,9 @@ class BookForm extends Component {
       author: "",
       genre: "",
       price: ""
-    }
+    },
+    shouldRedirect: false
   };
-
-  componentDidUpdate() {
-    const initialBook = {
-      title: "",
-      author: "",
-      genre: "",
-      price: ""
-    }
-  if (this.state.book._id && !this.props.match.params.id) {
-    this.setState({book: initialBook})
-  };
-  }
 
   componentDidMount() {
     if (this.props.match.params.id) {
@@ -41,42 +30,61 @@ class BookForm extends Component {
     }
   }
 
-  submitBookHandler = (e, book) => {
-    e.preventDefault();
-    axios
-      .post(`${PATH_BASE}/book/add`, book)
-      .then(res => console.log("From axios post:"));
-    const resetBook = {
+  componentDidUpdate() {
+    const initialBook = {
       title: "",
       author: "",
       genre: "",
       price: ""
     };
-    this.setState({ book: resetBook, shouldRedirect: true });
+    if (this.state.book._id && !this.props.match.params.id) {
+      this.setState({ book: initialBook });
+    }
+  }
+
+  formChangeHandler = e => {
+    const book = {
+      ...this.state.book,
+      [e.target.name]: e.target.value
+    };
+    this.setState({ book });
   };
 
-  editBookHandler = (e, book) => {
+  submitFormHandler = (e) => {
+    // this.submitBookHandler(e, this.state.book);
+    this.editBookHandler(e, this.state.book);
+  }
+
+  submitBookHandler(e, book) {
     e.preventDefault();
-    // console.log("book:", book);
-    // axios
-    //   .put(`${PATH_BASE}/book/edit/${book._id}`, book)
-    //   .then(res => {
-    //     console.log("Edit succesful");
-    //   })
-    //   .catch(err => console.log(err));
+    axios
+    .post(`${PATH_BASE}/book/add`, book)
+    .then(res => console.log("From axios post:"));
+    // const resetBook = { title: "", author: "", genre: "", price: "" };
+    this.setState({ shouldRedirect: true });
+  };
+  
+  editBookHandler(e, book) {
+    e.preventDefault();
+    axios
+      .put(`${PATH_BASE}/book/edit/${book._id}`, book)
+      .then(res => {
+        console.log("Edit succesful");
+      })
+      .catch(err => console.log(err));
+    this.setState({ shouldRedirect: true });
   };
 
   render() {
-    let [formName, submitFunction] = ["Add New", this.submitBookHandler];
-    if (this.state.book.title.length) {
-      [formName, submitFunction] = ["Edit", this.editBookHandler];
-    }
+    // console.log("Should Redirect?", this.state.shouldRedirect)
+    const formName = this.state.book.title.length ? "Edit" : "Add New";
     return (
       <div className="book-form">
         <FormFields
           book={this.state.book}
+          handleChange={this.formChangeHandler}
           title={`${formName} Book`}
-          onSubmitClicked={submitFunction}
+          handleSubmit={this.submitFormHandler}
         />
         {this.state.shouldRedirect && <Redirect to="/" />}
       </div>

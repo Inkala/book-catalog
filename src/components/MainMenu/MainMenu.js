@@ -12,6 +12,9 @@ const mainMenu = props => (
         <Link to={"/"} className="menu-logo">BookStore</Link>
         <ul className="menu-items">
           <li className="menu-item">
+            <Link to={"/"}>Books</Link>
+          </li>
+          <li className="menu-item">
             <Link to={"/add"}>Add Book</Link>
           </li>
           <li className="menu-item">
