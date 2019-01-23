@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define collection and schema for Business
+// Define collection and schema for Books
 let Book = new Schema({
   title: {
     type: String

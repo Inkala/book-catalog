@@ -34,7 +34,7 @@ class BookCatalog extends Component {
     error: null
   };
 
-  fetchDataHandler = () => {
+  fetchBooksHandler = () => {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
@@ -46,8 +46,7 @@ class BookCatalog extends Component {
   };
 
   componentDidMount() {
-    this.fetchDataHandler();
-    setTimeout(this.fetchDataHandler, 500);
+    this.fetchBooksHandler();
   }
 
   filterBookHandler = e => {
@@ -74,7 +73,7 @@ class BookCatalog extends Component {
         .get(`${PATH_BASE}/book/delete/${book._id}`)
         .then(res => {
           console.log("Deleted");
-          this.fetchDataHandler();
+          this.fetchBooksHandler();
         })
         .catch(err => console.log(err));
     }
