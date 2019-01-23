@@ -8,9 +8,8 @@ import "./BookCatalog.css";
 
 /**
  * TODO:
- * Change reset form for redirect
  * Create genres dropdown
- * Make Add Books and Genres a different page
+ * Make Genres page
  * Refresh Form Name
  * Add CRUD funcs to genres page
  * Make fields required
@@ -38,6 +37,7 @@ class BookCatalog extends Component {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
+        console.log("this", this)
         this.setState({ bookList: res.data, initialBookList: res.data });
       })
       .catch(err => {
@@ -59,7 +59,10 @@ class BookCatalog extends Component {
     );
     this.setState({ bookList: filteredList });
   };
-
+  gendreFilterHandler() {
+    console.log("Dropdon Changed");
+    // filterBookHandler(value)
+  }
   deleteBookHandler = book => {
     if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
       axios

@@ -1,12 +1,12 @@
 :root {
   --dark-blue: #023c57;
-  --light-blue: #b3c9d4;
-  --blue-grey: #d0dbe1;
-  --blue-grey: #d0dbe1;
+  --light-blue: #c8d5dc;
+  --blue-grey: #e4e9ec;
   --light-grey: #f4f4f4;
   --grey: #808080;
   --dark-grey: #3a3a3a;
-  --border: 1px solid #dddddd;
+  --border-grey: #dddddd;
+  --border: 1px solid var(--border-grey);
 }
 
 body {

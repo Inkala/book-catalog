@@ -1,0 +1,53 @@
+.dropdown-wrapper {}
+
+.dropdown {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+  width: 115px;
+  box-sizing: border-box;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  background: var(--blue-grey);
+  padding-left: 10px;
+}
+
+.dd-menu {
+  font-size: 0.85rem;
+}
+
+.dd-menu div {
+  color: var(--dark-blue);
+}
+
+.dd-menu div:hover {
+  background-color: var(--light-grey);
+}
+
+.dd-placeholder {
+}
+
+.dd-header {
+  
+}
+
+.dd-header-title {
+  
+}
+
+.dd-list {
+
+}
+
+.dd-list-item {
+  
+}
+
+.dd-control {
+  
+}
+
+.dd-arrow {
+
+}

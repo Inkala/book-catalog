@@ -1,18 +1,18 @@
 import React from "react";
 
-import GenresFilter from "./GenresFilter/GenresFilter";
+import Dropdown from "../Dropdown/Dropdown";
 import "./SearchBar.css";
 
 const searchBar = props => (
-  <form className="search-bar" onSubmit={props.onSubmit}>
+  <div className="search-bar">
     <input
       type="text"
       className="search-bar__input"
       placeholder="Search for an article..."
       onChange={props.onSearchChange}
     />
-    <GenresFilter />
-  </form>
+    <Dropdown />
+  </div>
 );
 
 export default searchBar;
