@@ -58,3 +58,29 @@ db.book.insert({
   componentWillUnmount() {
     console.log("From componentWillUnmount");
   }
+
+
+
+
+Classic
+Graphic Novel
+Comic
+Detective
+Fantasy
+Horror
+Humor
+Romance
+Mystery
+Mythology
+Science fiction
+Short story
+Suspense/thriller
+Biography
+Autobiograpy
+Essay 
+Journalism
+Self-help
+Speech 
+Textbook
+Children
+Erotic

@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./DB.js');
 const bookRoute = require('./book.route');
+const genreRoute = require('./book.route');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/book', bookRoute);
+app.use('/genre', genreRoute);
 
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);

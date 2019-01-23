@@ -25,6 +25,10 @@
   background-color: var(--light-grey);
 }
 
+.dd-menu div:first-child {
+  font-weight: bold;
+}
+
 .dd-placeholder {
 }
 

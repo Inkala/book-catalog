@@ -8,9 +8,8 @@ import "./BookCatalog.css";
 
 /**
  * TODO:
- * Create genres dropdown
+ * Separate add from edit forms
  * Make Genres page
- * Refresh Form Name
  * Add CRUD funcs to genres page
  * Make fields required
  * Handle success and  error messages
@@ -30,20 +29,21 @@ class BookCatalog extends Component {
     },
     bookList: null,
     initialBookList: [],
+    inputParam: "",
+    dropdownParam: "",
     error: null
   };
 
-  fetchDataHandler() {
+  fetchDataHandler = () => {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
-        console.log("this", this)
         this.setState({ bookList: res.data, initialBookList: res.data });
       })
       .catch(err => {
         console.log(err);
       });
-  }
+  };
 
   componentDidMount() {
     this.fetchDataHandler();
@@ -59,10 +59,15 @@ class BookCatalog extends Component {
     );
     this.setState({ bookList: filteredList });
   };
-  gendreFilterHandler() {
-    console.log("Dropdon Changed");
-    // filterBookHandler(value)
-  }
+
+  gendreFilterHandler = term => {
+    console.log(term)
+    const filteredList = this.state.initialBookList.filter(book =>
+      book.genre.includes(term.value)
+    );
+    this.setState({ bookList: filteredList });
+  };
+
   deleteBookHandler = book => {
     if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
       axios
@@ -82,17 +87,50 @@ class BookCatalog extends Component {
 
     return (
       <div className="book-catalog">
-        <SearchBar onSearchChange={this.filterBookHandler} />
+        <SearchBar
+          onSearchChange={this.filterBookHandler}
+          onDropdownChange={this.gendreFilterHandler}
+        />
         {this.state.bookList ? (
           <BookList
             bookList={this.state.bookList}
             editClicked={this.editBookHandler}
             deleteClicked={this.deleteBookHandler}
           />
-        ) : <div>Loading...</div>}
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     );
   }
 }
 
 export default BookCatalog;
+
+
+// Tests
+  // All components load correctly
+  // Creat Book
+  // Read Book
+  // Update Book
+  // Delete Book
+  // Creat Genre
+  // Read Genre
+  // Update Genre
+  // Delete Genre
+
+// Genres Backend
+  // Create a schema for genres and other files
+  // Conect back and front
+  // Get and post from genres db
+
+// Genres Front end
+  // Genres list from db
+  // Add Genres Button and input
+  // Save button must be desable
+  // Edit button in all genres will show the input
+  // Edited imput enables the save button
+
+// Book form
+  // Replace genres input with dropdown
+

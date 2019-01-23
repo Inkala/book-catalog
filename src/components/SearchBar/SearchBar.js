@@ -11,7 +11,7 @@ const searchBar = props => (
       placeholder="Search for an article..."
       onChange={props.onSearchChange}
     />
-    <Dropdown />
+    <Dropdown onDropdownChange={props.onDropdownChange}/>
   </div>
 );
 

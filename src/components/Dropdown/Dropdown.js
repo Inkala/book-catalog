@@ -5,6 +5,7 @@ import "react-dropdown/style.css";
 import "./Dropdown.css";
 
 const options = [
+  {value: "", label: "All"},
   "Action",
   "Adventure",
   "Fantasy",
@@ -12,19 +13,18 @@ const options = [
   "Horror",
   "Thriller"
 ];
-const defaultOption = "Genre";
+const defaultOption = options[0]
 
 const dropdown = props => (
   <div className="dropdown-wrapper">
     <Dropdown
       options={options}
-      onChange={props.dropdownChanged}
+      onChange={props.onDropdownChange}
       value={defaultOption}
       placeholder="Select an option"
-      // disabled
       controlClassName="dropdown"
-      placeholderClassName='dd-placeholder'
-menuClassName='dd-menu'
+      placeholderClassName="dd-placeholder"
+      menuClassName="dd-menu"
     />
   </div>
 );
