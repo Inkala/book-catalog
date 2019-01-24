@@ -8,13 +8,12 @@ import "./BookCatalog.css";
 
 /**
  * TODO:
- * Make Genres page
- * Make fields required
+ * Confirmation Modal
  * Handle success and  error messages
+ * Loading spinner
  * Write tests
  * Style components
  * Clean code and comments and this.props/this.state
- * Loading spinner
  */
 
 class BookCatalog extends Component {
