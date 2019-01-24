@@ -34,5 +34,3 @@ export default dropdown;
 // className='dropdown'
 // placeholderClassName='dd-placeholder'
 // arrowClassName='dd-arrow'
-
-// "Action", "Adventure", "Fantasy", "Fiction", "Horror", "Thriller";

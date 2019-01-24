@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../helpers/Button/Button";
+
 import "./FormFields.css";
 
 const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
@@ -48,9 +48,9 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
             onChange={handleChange}
           />
         </div>
-        <Button type="submit" className="bf-form__button">
+        <button type="submit" className="bf-form__button">
           Save
-        </Button>
+        </button>
       </form>
     </div>
   );
