@@ -9,7 +9,6 @@
   color: var(--dark-blue);
   background-color: var(--light-blue);
   border-bottom: 1px solid #bbc3c7;
-  z-index: 100;
 }
 
 .container {

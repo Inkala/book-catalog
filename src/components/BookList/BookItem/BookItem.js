@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
+import Button from "../../../helpers/Button/Button";
+
 import "./BookItem.css";
 
 const bookItem = ({ book, deleteBook }) => (
@@ -14,9 +16,9 @@ const bookItem = ({ book, deleteBook }) => (
       {/* <Link to={{pathname: `/edit/${book._id}`, book }} className="button button--edit" > */}
         Edit
       </Link>
-      <button type="button" className="button--delete" onClick={() => deleteBook(book)} >
+      <Button type="button" className="button--delete" onClick={() => deleteBook(book)} >
         Remove
-      </button>
+      </Button>
     </div>
   </div>  
 );

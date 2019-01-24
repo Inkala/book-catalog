@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-// import MainMenu from "./components/MainMenu/MainMenu";
-import BookData from "./container/BookData/BookData";
+import MainMenu from "./components/MainMenu/MainMenu";
+// import BookCatalog from "./container/BookCatalog/BookCatalog";
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <BookData />
+        <MainMenu />
       </div>
     );
   }
