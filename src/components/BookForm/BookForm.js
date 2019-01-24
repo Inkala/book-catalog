@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import { Redirect } from "react-router";
 
 import FormFields from "./FormFields/FormFields";
 import { PATH_BASE } from "../../consts";
@@ -13,23 +12,12 @@ class BookForm extends Component {
       author: "",
       genre: "",
       price: ""
-    },
-    shouldRedirect: false
+    }
   };
 
-  componentDidMount() {
-    if (this.props.match.params.id) {
-      axios
-        .get(`${PATH_BASE}/book/${this.props.match.params.id}`)
-        .then(res => {
-          this.setState({ book: res.data });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }
-  }
+  /*--- Create book methods ---*/
 
+  // Sets initial empty book when Adding new book
   componentDidUpdate() {
     const initialBook = {
       title: "",
@@ -42,7 +30,49 @@ class BookForm extends Component {
     }
   }
 
+  // Sends new book to db
+  submitBookHandler(e, book) {
+    e.preventDefault();
+    axios
+      .post(`${PATH_BASE}/book/add`, book)
+      .then(res => console.log("From axios post:"));
+  }
+
+  /*--- Update Books ---*/
+
+  // Fetches single book when Editing book
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      axios
+        .get(`${PATH_BASE}/book/${this.props.match.params.id}`)
+        .then(res => {
+          this.setState({ book: res.data, editing: true });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }
+
+  // Sends updated book to db
+  editBookHandler(e, book) {
+    e.preventDefault();
+    console.log("Editing", book);
+    axios
+      .post(`${PATH_BASE}/book/edit/${book._id}`, book)
+      .then(res => {
+        console.log("Edit succesful");
+      })
+      .catch(err => console.log(err));
+  }
+
+  /*--- Form Methods ---*/
+
+  // Retreives information from form fields
   formChangeHandler = e => {
+    // let val = e.target.value;
+    e.target.value =
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     const book = {
       ...this.state.book,
       [e.target.name]: e.target.value
@@ -50,43 +80,28 @@ class BookForm extends Component {
     this.setState({ book });
   };
 
+  // Chooses where to send the book information
   submitFormHandler = e => {
-    this.submitBookHandler(e, this.state.book);
-    // this.editBookHandler(e, this.state.book);
+    if (this.props.match.path === "/add") {
+      this.submitBookHandler(e, this.state.book);
+    } else {
+      this.editBookHandler(e, this.state.book);
+    }
+    this.props.history.push("/");
+    // this.props.history.push({
+    //   pathname: "/",
+    //   state: { book }
+    // });
   };
 
-  submitBookHandler(e, book) {
-    e.preventDefault();
-    axios
-      .post(`${PATH_BASE}/book/add`, book)
-      .then(res => console.log("From axios post:"));
-    // const resetBook = { title: "", author: "", genre: "", price: "" };
-    this.props.history.push({
-      pathname: '/',
-      state: {book}
-    })
-  }
-
-  editBookHandler(e, book) {
-    e.preventDefault();
-    axios
-      .post(`${PATH_BASE}/book/edit/${book._id}`, book)
-      .then(res => {
-        console.log("Edit succesful");
-      })
-      .catch(err => console.log(err));
-      this.props.history.push('/');
-  }
-
   render() {
-    // console.log("Should Redirect?", this.state.shouldRedirect)
     const formName = this.state.book.title.length ? "Edit" : "Add New";
     return (
       <div className="book-form">
         <FormFields
           book={this.state.book}
           handleChange={this.formChangeHandler}
-          title={`${formName} Book`}
+          formTitle={`${formName} Book`}
           handleSubmit={this.submitFormHandler}
         />
         {/* {this.state.shouldRedirect && <Redirect to="/" />} */}

@@ -11,6 +11,10 @@
 
 .book-item h3 {
   margin: 0.8em 0;
+  color: var(--dark-blue);
+  font-size: 1.35rem;
+  width: auto;
+  text-shadow: 1px 2px 0px var(--light-blue);
 }
 
 .book-item p {
@@ -26,4 +30,18 @@
   width: 85%;
   align-self: center;
   margin-top: 5px;
+}
+
+.book-item__buttons .button--edit {
+  color: #165eb1;
+  border-color: #b7cfeb;
+  width: 45%;
+  box-sizing: border-box;
+}
+
+.book-item__buttons .button--delete {
+  color: #7e0000;
+  border-color: #deb4b4;
+  width: 45%;
+  box-sizing: border-box;
 }

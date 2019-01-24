@@ -8,9 +8,7 @@ import "./BookCatalog.css";
 
 /**
  * TODO:
- * Separate add from edit forms
  * Make Genres page
- * Add CRUD funcs to genres page
  * Make fields required
  * Handle success and  error messages
  * Write tests
@@ -29,25 +27,32 @@ class BookCatalog extends Component {
     },
     bookList: null,
     initialBookList: [],
-    inputParam: "",
-    dropdownParam: "",
-    error: null
+    genreList: [{ value: "", label: "All" }],
+    error: null,
+    genreValue: ""
   };
+
+  /*--- Read book Data from DB ---*/
 
   fetchBooksHandler = () => {
     axios
       .get(`${PATH_BASE}/book`)
       .then(res => {
         this.setState({ bookList: res.data, initialBookList: res.data });
+        this.genreListHandler();
       })
       .catch(err => {
         console.log(err);
       });
   };
 
+  /*--- Call fetch method when app loads ---*/
+
   componentDidMount() {
     this.fetchBooksHandler();
   }
+
+  /*--- Search Bar Methods ---*/
 
   filterBookHandler = e => {
     const searchValue = e.target.value.toLowerCase();
@@ -59,13 +64,14 @@ class BookCatalog extends Component {
     this.setState({ bookList: filteredList });
   };
 
-  gendreFilterHandler = term => {
-    console.log(term)
+  genderFilterHandler = term => {
     const filteredList = this.state.initialBookList.filter(book =>
       book.genre.includes(term.value)
     );
     this.setState({ bookList: filteredList });
   };
+
+  /*--- Delete Books ---*/
 
   deleteBookHandler = book => {
     if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
@@ -79,16 +85,31 @@ class BookCatalog extends Component {
     }
   };
 
+  /*--- Genres Methods ---*/
+
+  // Handles filtering
+  onGenreChange = e => {
+    this.setState({ genreValue: e.target.value });
+  };
+
+  // Handles Dropdown content
+  genreListHandler() {
+    const genres = [];
+    this.state.bookList.map(book => genres.push(book.genre));
+    const genreList = [this.state.genreList[0], ...new Set(genres.sort())];
+    this.setState({ genreList });
+  }
+
   render() {
     if (this.state.error) {
       return <p>Something went wrong</p>;
     }
-
     return (
       <div className="book-catalog">
         <SearchBar
           onSearchChange={this.filterBookHandler}
-          onDropdownChange={this.gendreFilterHandler}
+          genreList={this.state.genreList}
+          onDropdownChange={this.genderFilterHandler}
         />
         {this.state.bookList ? (
           <BookList
@@ -106,30 +127,25 @@ class BookCatalog extends Component {
 
 export default BookCatalog;
 
-
 // Tests
-  // All components load correctly
-  // Creat Book
-  // Read Book
-  // Update Book
-  // Delete Book
-  // Creat Genre
-  // Read Genre
-  // Update Genre
-  // Delete Genre
+// All components load correctly
+// Creat Book
+// Read Book
+// Update Book
+// Delete Book
+// Creat Genre
+// Read Genre
+// Update Genre
+// Delete Genre
 
-// Genres Backend
-  // Create a schema for genres and other files
-  // Conect back and front
-  // Get and post from genres db
-
-// Genres Front end
-  // Genres list from db
-  // Add Genres Button and input
-  // Save button must be desable
-  // Edit button in all genres will show the input
-  // Edited imput enables the save button
+// Genres
+// Genres list
+// Add Genres Button and input
+// Save button must be desable
+// Edit button in all genres will show the input
+// Edited imput enables the save button
 
 // Book form
-  // Replace genres input with dropdown
+// Replace genres input with dropdown
 
+// Loading Component

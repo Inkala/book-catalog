@@ -1,7 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-
-import Button from "../../../helpers/Button/Button";
+import { Link } from "react-router-dom";
 
 import "./BookItem.css";
 
@@ -12,15 +10,18 @@ const bookItem = ({ book, deleteBook }) => (
     <p><span>Genre: </span>{book.genre}</p>
     <p><span>Price: </span>{`$ ${book.price}`}</p>
     <div className="book-item__buttons">
-      <Link to={`/edit/${book._id}`} className="button button--edit" >
-      {/* <Link to={{pathname: `/edit/${book._id}`, book }} className="button button--edit" > */}
+      <Link to={`/edit/${book._id}`} className="button button--edit">
         Edit
       </Link>
-      <Button type="button" className="button--delete" onClick={() => deleteBook(book)} >
+      <button
+        type="button"
+        className="button button--delete"
+        onClick={() => deleteBook(book)}
+      >
         Remove
-      </Button>
+      </button>
     </div>
-  </div>  
+  </div>
 );
 
 export default bookItem;

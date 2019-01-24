@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../../../helpers/Button/Button";
 import "./FormFields.css";
 
 const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
@@ -15,6 +14,7 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
             className="bf-form__input"
             value={book.title}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="bf-form__item">
@@ -25,6 +25,7 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
             className="bf-form__input"
             value={book.author}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="bf-form__item">
@@ -35,6 +36,7 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
             className="bf-form__input"
             value={book.genre}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="bf-form__item">
@@ -46,11 +48,12 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
             className="bf-form__input"
             value={book.price}
             onChange={handleChange}
+            required
           />
         </div>
-        <Button type="submit" className="bf-form__button">
+        <button type="submit" className="button bf-form__button">
           Save
-        </Button>
+        </button>
       </form>
     </div>
   );
