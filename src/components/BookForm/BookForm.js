@@ -99,6 +99,7 @@ class BookForm extends Component {
   render() {
     const modalMessage = this.state.book.title.length ? "updated" : "saved";
     const formName = this.state.book.title.length ? "Edit" : "Add New";
+    const formParams = ["Title", "Author", "Genre", "Price"]
     return (
       <div style={{width: '75%'}}>
         <Modal show={this.state.showModal}>
@@ -115,6 +116,7 @@ class BookForm extends Component {
           handleChange={this.formChangeHandler}
           formTitle={`${formName} Book`}
           handleSubmit={this.submitFormHandler}
+          formParams={formParams}
         />
       </div>
     );

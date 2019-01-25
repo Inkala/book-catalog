@@ -1,56 +1,35 @@
 import React from "react";
+
 import "./FormFields.css";
 
-const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
+const formFields = ({
+  formParams,
+  formTitle,
+  book,
+  handleChange,
+  handleSubmit
+}) => {
+  const form = formParams.map(paramTitle => {
+    const paramValue = paramTitle.toLowerCase();
+    return (
+      <div key={paramValue} className="bf-form__item">
+        <label className="bf-form__label">{paramTitle}</label>
+        <input
+          name={paramValue}
+          type={(paramTitle === "Price" ? "number" : "text")}
+          className="bf-form__input"
+          value={book[paramValue]}
+          onChange={handleChange}
+          required
+        />
+      </div>
+    );
+  });
   return (
     <div className="bf-wrapper">
       <h3>{formTitle}</h3>
       <form className="bf-form" onSubmit={handleSubmit}>
-        <div className="bf-form__item">
-          <label className="bf-form__label"> Title:</label>
-          <input
-            name="title"
-            type="text"
-            className="bf-form__input"
-            value={book.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="bf-form__item">
-          <label className="bf-form__label">Author:</label>
-          <input
-            name="author"
-            type="text"
-            className="bf-form__input"
-            value={book.author}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="bf-form__item">
-          <label className="bf-form__label">Genre:</label>
-          <input
-            name="genre"
-            type="text"
-            className="bf-form__input"
-            value={book.genre}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="bf-form__item">
-          <label className="bf-form__label">Price:</label>
-          <span>$</span>
-          <input
-            name="price"
-            type="number"
-            className="bf-form__input"
-            value={book.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {form}
         <button type="submit" className="button button--success">
           Save
         </button>

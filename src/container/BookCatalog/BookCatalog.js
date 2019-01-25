@@ -106,7 +106,7 @@ class BookCatalog extends Component {
       return <p>Something went wrong</p>;
     }
     return (
-      <div style={{'padding-top': 90,
+      <div style={{paddingTop: 90,
         width: '100%'}}>
         <Modal show={this.state.showModal}>
           <p>
