@@ -1,7 +1,7 @@
 import React from "react";
 import "./FormFields.css";
 
-const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
+const formFields = ({ formTitle, book, handleChange, handleSubmit, onSaveClicked }) => {
   return (
     <div className="bf-wrapper">
       <h3>{formTitle}</h3>

@@ -3,6 +3,7 @@ import axios from "axios";
 
 import FormFields from "./FormFields/FormFields";
 import { PATH_BASE } from "../../consts";
+import Modal from "../../UI/Modal/Modal";
 import "./BookForm.css";
 
 class BookForm extends Component {
@@ -12,7 +13,8 @@ class BookForm extends Component {
       author: "",
       genre: "",
       price: ""
-    }
+    },
+    showModal: false
   };
 
   /*--- Create book methods ---*/
@@ -87,17 +89,29 @@ class BookForm extends Component {
     } else {
       this.editBookHandler(e, this.state.book);
     }
-    this.props.history.push("/");
+    this.setState({showModal: true})
     // this.props.history.push({
     //   pathname: "/",
     //   state: { book }
     // });
   };
 
+  handleModalShow = () => {
+    this.setState({showModal: false})
+    if (this.state.showModal) {
+      // console.log("Hide")
+      this.props.history.push("/");
+    }
+  }
+
   render() {
+    const modalMessage = this.state.book.title.length ? "updated" : "saved";
     const formName = this.state.book.title.length ? "Edit" : "Add New";
     return (
       <div className="book-form">
+        <Modal show={this.state.showModal} clicked={this.handleModalShow}>
+          <p>Your book has been succesfully {modalMessage}</p>
+        </Modal>
         <FormFields
           book={this.state.book}
           handleChange={this.formChangeHandler}
