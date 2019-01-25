@@ -31,17 +31,3 @@
   align-self: center;
   margin-top: 5px;
 }
-
-.book-item__buttons .button--edit {
-  color: #165eb1;
-  border-color: #b7cfeb;
-  width: 45%;
-  box-sizing: border-box;
-}
-
-.book-item__buttons .button--delete {
-  color: #7e0000;
-  border-color: #deb4b4;
-  width: 45%;
-  box-sizing: border-box;
-}

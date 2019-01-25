@@ -59,7 +59,6 @@ class BookForm extends Component {
   // Sends updated book to db
   editBookHandler(e, book) {
     e.preventDefault();
-    console.log("Editing", book);
     axios
       .post(`${PATH_BASE}/book/edit/${book._id}`, book)
       .then(res => {
@@ -89,7 +88,7 @@ class BookForm extends Component {
     } else {
       this.editBookHandler(e, this.state.book);
     }
-    this.setState({showModal: true})
+    this.setState({ showModal: true });
     // this.props.history.push({
     //   pathname: "/",
     //   state: { book }
@@ -97,20 +96,26 @@ class BookForm extends Component {
   };
 
   handleModalShow = () => {
-    this.setState({showModal: false})
+    this.setState({ showModal: false });
     if (this.state.showModal) {
       // console.log("Hide")
       this.props.history.push("/");
     }
-  }
+  };
 
   render() {
     const modalMessage = this.state.book.title.length ? "updated" : "saved";
     const formName = this.state.book.title.length ? "Edit" : "Add New";
     return (
       <div className="book-form">
-        <Modal show={this.state.showModal} clicked={this.handleModalShow}>
+        <Modal show={this.state.showModal}>
           <p>Your book has been succesfully {modalMessage}</p>
+          <button
+            className="button button--success"
+            onClick={this.handleModalShow}
+          >
+            Ok
+          </button>
         </Modal>
         <FormFields
           book={this.state.book}
@@ -118,6 +123,7 @@ class BookForm extends Component {
           formTitle={`${formName} Book`}
           handleSubmit={this.submitFormHandler}
         />
+
         {/* {this.state.shouldRedirect && <Redirect to="/" />} */}
       </div>
     );

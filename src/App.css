@@ -20,6 +20,8 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 0.8em;
+  box-sizing: border-box;
+  width: 75px;
 }
 
 a.button {
@@ -28,4 +30,19 @@ a.button {
 
 .button:hover {
   color: #222;
+}
+
+.button--success {
+  color: #2d8a31;
+  border-color: #b9d8ba;
+}
+
+.button--edit {
+  color: #165eb1;
+  border-color: #b7cfeb;
+}
+
+.button--delete {
+  color: #7e0000;
+  border-color: #deb4b4;
 }

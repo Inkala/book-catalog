@@ -11,11 +11,3 @@
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 }
-
-.modal .button-success {
-  color: #2d8a31;
-  border-color: #b9d8ba;
-  width: 15%;
-  box-sizing: border-box;
-  margin: auto;
-}

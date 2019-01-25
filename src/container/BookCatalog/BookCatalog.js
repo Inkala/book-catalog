@@ -3,6 +3,7 @@ import axios from "axios";
 
 import BookList from "../../components/BookList/BookList";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import Modal from "../../UI/Modal/Modal";
 import { PATH_BASE } from "../../consts";
 import "./BookCatalog.css";
 
@@ -28,7 +29,9 @@ class BookCatalog extends Component {
     initialBookList: [],
     genreList: [{ value: "", label: "All" }],
     error: null,
-    genreValue: ""
+    genreValue: "",
+    bookTitle: "",
+    showModal: false
   };
 
   /*--- Read book Data from DB ---*/
@@ -72,16 +75,25 @@ class BookCatalog extends Component {
 
   /*--- Delete Books ---*/
 
-  deleteBookHandler = book => {
-    if (window.confirm(`Are you sure you want to delete ${book.title}?`)) {
-      axios
-        .get(`${PATH_BASE}/book/delete/${book._id}`)
-        .then(res => {
-          console.log("Deleted");
-          this.fetchBooksHandler();
-        })
-        .catch(err => console.log(err));
-    }
+  showModal = book => {
+    this.setState({book, showModal: true})
+  };
+
+  handleModalClicked = (e) => {
+    if (e.target.value) {
+      this.deleteBookHandler()
+    } 
+    this.setState({showModal: false})
+  };
+
+  deleteBookHandler() {
+    axios
+      .get(`${PATH_BASE}/book/delete/${this.state.book._id}`)
+      .then(res => {
+        console.log("Deleted");
+        this.fetchBooksHandler();
+      })
+      .catch(err => console.log(err));
   };
 
   /*--- Genres Methods ---*/
@@ -105,6 +117,22 @@ class BookCatalog extends Component {
     }
     return (
       <div className="book-catalog">
+        <Modal show={this.state.showModal}>
+          <p>Are you sure you want to delete <b>{this.state.book.title}</b>?</p>
+          <button
+            className="button button--success"
+            onClick={this.handleModalClicked}
+            value="delete"
+          >
+            Ok
+          </button>
+          <button
+            className="button button--delete"
+            onClick={this.handleModalClicked}
+          >
+            Cancel
+          </button>
+        </Modal>
         <SearchBar
           onSearchChange={this.filterBookHandler}
           genreList={this.state.genreList}
@@ -114,7 +142,7 @@ class BookCatalog extends Component {
           <BookList
             bookList={this.state.bookList}
             editClicked={this.editBookHandler}
-            deleteClicked={this.deleteBookHandler}
+            deleteClicked={this.showModal}
           />
         ) : (
           <div>Loading...</div>

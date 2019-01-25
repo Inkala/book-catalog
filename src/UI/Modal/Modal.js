@@ -11,7 +11,6 @@ const modal = props => {
   //     nextProps.children !== this.props.children
   //   );
   // }
-  console.log(props.show)
   return (
     <div>
       <Backdrop show={props.show} />
@@ -23,7 +22,6 @@ const modal = props => {
         }}
       >
         {props.children}
-        <button className="button button-success" onClick={props.clicked}>Ok</button>
       </div>
     </div>
   );
