@@ -1,7 +1,7 @@
 import React from "react";
 import "./FormFields.css";
 
-const formFields = ({ formTitle, book, handleChange, handleSubmit, onSaveClicked }) => {
+const formFields = ({ formTitle, book, handleChange, handleSubmit }) => {
   return (
     <div className="bf-wrapper">
       <h3>{formTitle}</h3>
@@ -51,7 +51,7 @@ const formFields = ({ formTitle, book, handleChange, handleSubmit, onSaveClicked
             required
           />
         </div>
-        <button type="submit" className="button bf-form__button">
+        <button type="submit" className="button button--success">
           Save
         </button>
       </form>

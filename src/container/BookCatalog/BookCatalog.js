@@ -3,19 +3,9 @@ import axios from "axios";
 
 import BookList from "../../components/BookList/BookList";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Modal from "../../UI/Modal/Modal";
+import Modal from "../../components/UI/Modal/Modal";
+import Loading from "../../components/UI/Loading/Loading"
 import { PATH_BASE } from "../../consts";
-import "./BookCatalog.css";
-
-/**
- * TODO:
- * Confirmation Modal
- * Handle success and  error messages
- * Loading spinner
- * Write tests
- * Style components
- * Clean code and comments and this.props/this.state
- */
 
 class BookCatalog extends Component {
   state = {
@@ -76,14 +66,14 @@ class BookCatalog extends Component {
   /*--- Delete Books ---*/
 
   showModal = book => {
-    this.setState({book, showModal: true})
+    this.setState({ book, showModal: true });
   };
 
-  handleModalClicked = (e) => {
+  handleModalClicked = e => {
     if (e.target.value) {
-      this.deleteBookHandler()
-    } 
-    this.setState({showModal: false})
+      this.deleteBookHandler();
+    }
+    this.setState({ showModal: false });
   };
 
   deleteBookHandler() {
@@ -94,7 +84,7 @@ class BookCatalog extends Component {
         this.fetchBooksHandler();
       })
       .catch(err => console.log(err));
-  };
+  }
 
   /*--- Genres Methods ---*/
 
@@ -116,22 +106,27 @@ class BookCatalog extends Component {
       return <p>Something went wrong</p>;
     }
     return (
-      <div className="book-catalog">
+      <div style={{'padding-top': 90,
+        width: '100%'}}>
         <Modal show={this.state.showModal}>
-          <p>Are you sure you want to delete <b>{this.state.book.title}</b>?</p>
-          <button
-            className="button button--success"
-            onClick={this.handleModalClicked}
-            value="delete"
-          >
-            Ok
-          </button>
-          <button
-            className="button button--delete"
-            onClick={this.handleModalClicked}
-          >
-            Cancel
-          </button>
+          <p>
+            Are you sure you want to delete <b>{this.state.book.title}</b>?
+          </p>
+          <div className="modal__buttons">
+            <button
+              className="button button--success"
+              onClick={this.handleModalClicked}
+              value="delete"
+            >
+              Ok
+            </button>
+            <button
+              className="button button--delete"
+              onClick={this.handleModalClicked}
+            >
+              Cancel
+            </button>
+          </div>
         </Modal>
         <SearchBar
           onSearchChange={this.filterBookHandler}
@@ -144,35 +139,10 @@ class BookCatalog extends Component {
             editClicked={this.editBookHandler}
             deleteClicked={this.showModal}
           />
-        ) : (
-          <div>Loading...</div>
-        )}
+        ) : (<Loading />)}
       </div>
     );
   }
 }
 
 export default BookCatalog;
-
-// Tests
-// All components load correctly
-// Creat Book
-// Read Book
-// Update Book
-// Delete Book
-// Creat Genre
-// Read Genre
-// Update Genre
-// Delete Genre
-
-// Genres
-// Genres list
-// Add Genres Button and input
-// Save button must be desable
-// Edit button in all genres will show the input
-// Edited imput enables the save button
-
-// Book form
-// Replace genres input with dropdown
-
-// Loading Component

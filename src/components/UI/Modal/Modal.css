@@ -1,0 +1,28 @@
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 50%;
+  max-width: 450px;
+  margin: auto;
+  top: 25%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+.modal__buttons {
+  display: flex;
+  width: 85%;
+  align-self: center;
+  margin-top: 5px;
+  justify-content: center;
+  margin: auto;
+}

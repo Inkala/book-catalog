@@ -5,14 +5,8 @@ import './Modal.css';
 
 const modal = props => {
 
-  // shouldComponentUpdateUpdate(nextProps, nextState) {
-  //   return (
-  //     nextProps.show !== this.props.show ||
-  //     nextProps.children !== this.props.children
-  //   );
-  // }
   return (
-    <div>
+    <div className="modal-wrapper">
       <Backdrop show={props.show} />
       <div
         className="modal"

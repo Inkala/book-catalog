@@ -24,6 +24,3 @@ const dropdown = props => {
 
 export default dropdown;
 
-// className='dropdown'
-// placeholderClassName='dd-placeholder'
-// arrowClassName='dd-arrow'

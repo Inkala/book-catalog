@@ -3,8 +3,7 @@ import axios from "axios";
 
 import FormFields from "./FormFields/FormFields";
 import { PATH_BASE } from "../../consts";
-import Modal from "../../UI/Modal/Modal";
-import "./BookForm.css";
+import Modal from "../UI/Modal/Modal";
 
 class BookForm extends Component {
   state = {
@@ -71,7 +70,6 @@ class BookForm extends Component {
 
   // Retreives information from form fields
   formChangeHandler = e => {
-    // let val = e.target.value;
     e.target.value =
       e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     const book = {
@@ -89,16 +87,11 @@ class BookForm extends Component {
       this.editBookHandler(e, this.state.book);
     }
     this.setState({ showModal: true });
-    // this.props.history.push({
-    //   pathname: "/",
-    //   state: { book }
-    // });
   };
 
   handleModalShow = () => {
     this.setState({ showModal: false });
     if (this.state.showModal) {
-      // console.log("Hide")
       this.props.history.push("/");
     }
   };
@@ -107,7 +100,7 @@ class BookForm extends Component {
     const modalMessage = this.state.book.title.length ? "updated" : "saved";
     const formName = this.state.book.title.length ? "Edit" : "Add New";
     return (
-      <div className="book-form">
+      <div style={{width: '75%'}}>
         <Modal show={this.state.showModal}>
           <p>Your book has been succesfully {modalMessage}</p>
           <button
@@ -123,8 +116,6 @@ class BookForm extends Component {
           formTitle={`${formName} Book`}
           handleSubmit={this.submitFormHandler}
         />
-
-        {/* {this.state.shouldRedirect && <Redirect to="/" />} */}
       </div>
     );
   }
