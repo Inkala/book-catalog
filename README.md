@@ -46,4 +46,4 @@ I would have liked to include either Redux or React Context but I did not feel c
 
 ### Additional notes
 
-The test I am presenting is in the master branch. I will continue working on the developer branch on what is there to imporoove for learning purposes, but I will not merge to master after I send this.
+The test I am presenting is in the master branch. I will continue working on another branch on what is there to imporoove for learning purposes, but I will not merge to master after I send this.
